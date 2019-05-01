@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+/*************************************************************************
+* ADOBE CONFIDENTIAL
+* ___________________
+*
+* Copyright 2019 Adobe
+* All Rights Reserved.
+*
+* NOTICE: Adobe permits you to use, modify, and distribute this file in
+* accordance with the terms of the Adobe license agreement accompanying
+* it. If you have received this file from a source other than Adobe,
+* then your use, modification, or distribution of it requires the prior
+* written permission of Adobe. 
+**************************************************************************/
+-->
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="./ext.js"></script>
+	<script src="./lib/CSInterface.js"></script>
+	<script src="./lib/jquery-1.9.1.js"></script>
+	<script src="./lib/Vulcan.js"></script>
+	<link id="ppstyle" href="css/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+	</script>
+</head>
+
+<body onLoad="onLoaded()">
+
+
+	<div>
+		<p>Position X: <input type="range" min="0" max="1" step="0.01" value="0.5" onChange="" id="xPos"></input> <span
+				id="xPosDisplay">0.5</span></p>
+		<p>Position Y: <input type="range" min="0" max="1" step="0.01" value="0.5" onChange="" id="yPos"></input> <span
+				id="yPosDisplay">0.5</span></p>
+	</div>
+</body>
+<script>
+	var csInterface = new CSInterface();
+
+	var xPosSlider = document.getElementById("xPos");
+	var yPosSlider = document.getElementById("yPos");
+
+	var xPosDisplay = document.getElementById("xPosDisplay");
+	var yPosDisplay = document.getElementById("yPosDisplay");
+
+	xPosDisplay.innerHTML = xPosSlider.value; // Display the default slider value
+	yPosDisplay.innerHTML = yPosSlider.value; // Display the default slider value
+
+	// Update the current slider value (each time you drag the slider handle)
+	xPosSlider.oninput = function () {
+		xPosDisplay.innerHTML = this.value;
+		csInterface.evalScript('$._PPP_.setParameter('+ xPosSlider.value + ',' + yPosSlider.value + ')');
+	}
+	yPosSlider.oninput = function () {
+		yPosDisplay.innerHTML = this.value;
+		csInterface.evalScript('$._PPP_.setParameter('+ xPosSlider.value + ',' + yPosSlider.value + ')');
+	}
+</script>
+
+</html>
